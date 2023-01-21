@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:state_example/screens/reusable/category_container.dart';
-
+import 'package:state_example/screens/reusable/product_view.dart';
 import '../state/product_provider.dart';
+import '../common/strings.dart';
 
 class ProductsListScreen extends StatelessWidget {
   ProductsListScreen({super.key});
@@ -19,10 +20,11 @@ class ProductsListScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "My Market",
           style: TextStyle(
-              color: Color.fromARGB(255, 116, 109, 109),
+              color: Strings.green,
+              // color: Color.fromARGB(255, 116, 109, 109),
               fontSize: 25,
               fontWeight: FontWeight.bold),
         ),
@@ -49,9 +51,7 @@ class ProductsListScreen extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          const SizedBox(
-            height: 10,
-          ),
+          Strings.h10,
           const Text(
             "Sell and Buy Products here",
             textAlign: TextAlign.center,
@@ -88,46 +88,23 @@ class ProductsListScreen extends StatelessWidget {
                   var product = productState
                           .categories[productState.selectedCategoryIndex]
                       ['products'][index];
-                  return Container(
-                    margin:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 2, color: Colors.grey),
-                        borderRadius: BorderRadius.circular(15)),
-                    child: ListTile(
-                        leading: SizedBox(
-                          child: Image.asset(
-                            width: 60,
-                            height: 50,
-                            "assets/men-shoes.jpg",
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                        title: Text(
-                          product['brand'],
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                        subtitle: Text(
-                          product['price'].toString(),
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                        trailing: IconButton(
-                          onPressed:
-                              productState.selectedProducts.indexOf(product) ==
-                                      -1
-                                  ? () {
-                                      productStateUpdate.addToCart(product);
-                                    }
-                                  : () {},
-                          icon: Icon(
-                            Icons.shopping_cart,
-                            color: productState.selectedProducts
-                                        .indexOf(product) ==
-                                    -1
+                  return ProductViewScreen(
+                    product: product,
+                    trailing: IconButton(
+                      onPressed:
+                          productState.selectedProducts.indexOf(product) == -1
+                              ? () {
+                                  productStateUpdate.addToCart(product);
+                                }
+                              : () {},
+                      icon: Icon(
+                        Icons.shopping_cart,
+                        color:
+                            productState.selectedProducts.indexOf(product) == -1
                                 ? Colors.red
                                 : Colors.grey,
-                          ),
-                        )),
+                      ),
+                    ),
                   );
                 }),
           )

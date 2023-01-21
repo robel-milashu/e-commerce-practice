@@ -15,7 +15,7 @@ class CategoryContainer extends StatelessWidget {
       child: Center(
         child: Text(
           title,
-          style: const TextStyle(fontSize: 30),
+          style: const TextStyle(fontSize: 25, color: Colors.grey),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:state_example/screens/reusable/product_view.dart';
 import 'package:state_example/state/product_provider.dart';
 
 class CartScreen extends StatelessWidget {
@@ -12,9 +13,10 @@ class CartScreen extends StatelessWidget {
     size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Cart  ${Provider.of<ProductState>(context).selectedCategoryIndex}",
-          style: const TextStyle(
+        iconTheme: const IconThemeData(color: Colors.grey),
+        title: const Text(
+          "My Cart",
+          style: TextStyle(
               color: Color.fromARGB(255, 116, 109, 109),
               fontSize: 25,
               fontWeight: FontWeight.bold),
@@ -31,22 +33,26 @@ class CartScreen extends StatelessWidget {
                 itemCount: productState.selectedProducts.length,
                 itemBuilder: (context, index) {
                   var pro = productState.selectedProducts[index];
-                  return ListTile(
-                    title: Text(
-                      pro['brand'],
-                      style: const TextStyle(fontSize: 25),
-                    ),
-                    subtitle: Text(
-                      pro['price'].toString(),
-                      style: const TextStyle(fontSize: 25),
-                    ),
-                    trailing: IconButton(
-                        onPressed: () {
-                          Provider.of<ProductState>(context, listen: false)
-                              .removeFromCart(pro);
-                        },
-                        icon: const Icon(Icons.delete)),
-                  );
+                  return ProductViewScreen(
+                      product: pro,
+                      trailing: IconButton(
+                          onPressed: () {
+                            Provider.of<ProductState>(context, listen: false)
+                                .removeFromCart(pro);
+                          },
+                          icon: const Icon(Icons.delete)));
+
+                  //  ListTile(
+                  //   title: Text(
+                  //     pro['brand'],
+                  //     style: const TextStyle(fontSize: 25),
+                  //   ),
+                  //   subtitle: Text(
+                  //     pro['price'].toString(),
+                  //     style: const TextStyle(fontSize: 25),
+                  //   ),
+                  //   trailing: ,
+                  // );
                 });
           })),
     );
