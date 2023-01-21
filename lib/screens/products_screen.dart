@@ -19,14 +19,26 @@ class ProductsListScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Products"),
+        title: const Text(
+          "My Market",
+          style: TextStyle(
+              color: Color.fromARGB(255, 116, 109, 109),
+              fontSize: 25,
+              fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
         actions: [
           Text(
             productState.selectedProducts.length.toString(),
             style: const TextStyle(fontSize: 50),
           ),
           IconButton(
-            icon: const Icon(Icons.shopping_cart),
+            icon: const Icon(
+              Icons.shopping_cart,
+              color: Colors.amber,
+            ),
             onPressed: () {
               // Navigator.push(context,
               //     MaterialPageRoute(builder: (context) => CartScreen()));
@@ -37,8 +49,19 @@ class ProductsListScreen extends StatelessWidget {
       ),
       body: ListView(
         children: [
+          const SizedBox(
+            height: 10,
+          ),
+          const Text(
+            "Sell and Buy Products here",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 20),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
           SizedBox(
-            height: 200,
+            height: 150,
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: Provider.of<ProductState>(context).categories.length,
@@ -52,23 +75,7 @@ class ProductsListScreen extends StatelessWidget {
                       },
                       child: CategoryContainer(
                         title: cat['title'],
-                      )
-                      // child: Container(
-                      //   width: 200,
-                      //   height: 200,
-                      //   margin: const EdgeInsets.all(10),
-                      //   decoration: BoxDecoration(
-                      //       color: Colors.amber,
-                      //       border: Border.all(width: 2, color: Colors.green),
-                      //       borderRadius: BorderRadius.circular(15)),
-                      //   child: Center(
-                      //     child: Text(
-                      //       cat['title'],
-                      //       style: const TextStyle(fontSize: 30),
-                      //     ),
-                      //   ),
-                      // ),
-                      );
+                      ));
                 }),
           ),
           SizedBox(
@@ -81,27 +88,47 @@ class ProductsListScreen extends StatelessWidget {
                   var product = productState
                           .categories[productState.selectedCategoryIndex]
                       ['products'][index];
-                  return ListTile(
-                      title: Text(
-                        product['brand'],
-                        style: const TextStyle(fontSize: 20),
-                      ),
-                      trailing: IconButton(
-                        onPressed:
-                            productState.selectedProducts.indexOf(product) == -1
-                                ? () {
-                                    productStateUpdate.addToCart(product);
-                                  }
-                                : () {},
-                        icon: Icon(
-                          Icons.shopping_cart,
-                          color:
+                  return Container(
+                    margin:
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                    decoration: BoxDecoration(
+                        border: Border.all(width: 2, color: Colors.grey),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: ListTile(
+                        leading: SizedBox(
+                          child: Image.asset(
+                            width: 60,
+                            height: 50,
+                            "assets/men-shoes.jpg",
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        title: Text(
+                          product['brand'],
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                        subtitle: Text(
+                          product['price'].toString(),
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        trailing: IconButton(
+                          onPressed:
                               productState.selectedProducts.indexOf(product) ==
                                       -1
-                                  ? Colors.red
-                                  : Colors.grey,
-                        ),
-                      ));
+                                  ? () {
+                                      productStateUpdate.addToCart(product);
+                                    }
+                                  : () {},
+                          icon: Icon(
+                            Icons.shopping_cart,
+                            color: productState.selectedProducts
+                                        .indexOf(product) ==
+                                    -1
+                                ? Colors.red
+                                : Colors.grey,
+                          ),
+                        )),
+                  );
                 }),
           )
         ],

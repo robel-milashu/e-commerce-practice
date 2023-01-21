@@ -13,7 +13,15 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-            "Cart  ${Provider.of<ProductState>(context).selectedCategoryIndex}"),
+          "Cart  ${Provider.of<ProductState>(context).selectedCategoryIndex}",
+          style: const TextStyle(
+              color: Color.fromARGB(255, 116, 109, 109),
+              fontSize: 25,
+              fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
       ),
       body: SizedBox(
           height: size.height * 0.5,

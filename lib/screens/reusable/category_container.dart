@@ -6,12 +6,11 @@ class CategoryContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200,
-      height: 200,
+      width: 160,
+      height: 150,
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-          color: Colors.amber,
-          border: Border.all(width: 2, color: Colors.green),
+          border: Border.all(width: 2, color: Colors.grey),
           borderRadius: BorderRadius.circular(15)),
       child: Center(
         child: Text(

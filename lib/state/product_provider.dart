@@ -18,6 +18,14 @@ class ProductState extends ChangeNotifier {
         // {"brand": "PC", "price": 40000},
       ]
     },
+    {
+      "title": "Cosmetics",
+      "products": [
+        {"brand": "TV", "price": 20000},
+        {"brand": "Mobile", "price": 30000},
+        // {"brand": "PC", "price": 40000},
+      ]
+    },
   ];
 
   int selectedCategoryIndex = 1;
