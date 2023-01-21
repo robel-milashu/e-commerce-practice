@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:state_example/screens/reusable/category_container.dart';
 
 import '../state/product_provider.dart';
 
@@ -45,26 +46,29 @@ class ProductsListScreen extends StatelessWidget {
                   var cat =
                       Provider.of<ProductState>(context).categories[index];
                   return InkWell(
-                    onTap: () {
-                      Provider.of<ProductState>(context, listen: false)
-                          .changeIndex(index);
-                    },
-                    child: Container(
-                      width: 200,
-                      height: 200,
-                      margin: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: Colors.amber,
-                          border: Border.all(width: 2, color: Colors.green),
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Center(
-                        child: Text(
-                          cat['title'],
-                          style: const TextStyle(fontSize: 30),
-                        ),
-                      ),
-                    ),
-                  );
+                      onTap: () {
+                        Provider.of<ProductState>(context, listen: false)
+                            .changeIndex(index);
+                      },
+                      child: CategoryContainer(
+                        title: cat['title'],
+                      )
+                      // child: Container(
+                      //   width: 200,
+                      //   height: 200,
+                      //   margin: const EdgeInsets.all(10),
+                      //   decoration: BoxDecoration(
+                      //       color: Colors.amber,
+                      //       border: Border.all(width: 2, color: Colors.green),
+                      //       borderRadius: BorderRadius.circular(15)),
+                      //   child: Center(
+                      //     child: Text(
+                      //       cat['title'],
+                      //       style: const TextStyle(fontSize: 30),
+                      //     ),
+                      //   ),
+                      // ),
+                      );
                 }),
           ),
           SizedBox(
